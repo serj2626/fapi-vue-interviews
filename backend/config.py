@@ -1,10 +1,11 @@
-from pathlib import Path
-
-from pydantic import BaseModel
 from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic import BaseModel
+
+from pathlib import Path
+from pprint import pprint
+
 
 BASE_DIR = Path(__file__).resolve().parent
-print(BASE_DIR)
 
 
 class AuthJWT(BaseModel):
@@ -21,7 +22,14 @@ class Settings(BaseSettings):
     DB_HOST: str
     DB_NAME: str
     DB_ECHO: bool = True
+
+    SMTP_HOST: str
+    SMTP_PORT: int
+    SMTP_USER: str
+    SMTP_PASS: str
+
     auth_jwt: AuthJWT = AuthJWT()
+
 
     @property
     def DB_URL(self) -> str:
@@ -31,3 +39,4 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
+pprint(settings)
