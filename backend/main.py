@@ -1,5 +1,9 @@
 from fastapi import FastAPI
-import sys
-print(sys.path)
+
 
 app = FastAPI()
+
+
+@app.get("/")
+async def root():
+    return {"message": "Hello World"}

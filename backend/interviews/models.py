@@ -1,12 +1,24 @@
+from typing import Annotated
 from sqlalchemy.orm import mapped_column
 from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import relationship
 import enum
-from sqlalchemy import ForeignKey
+from sqlalchemy import ForeignKey, text
 
 from datetime import datetime
 
-from backend.database import Base
+from base import Base
+
+
+created_at = Annotated[
+    datetime, mapped_column(server_default=text("TIMEZONE('utc', now())"))
+]
+updated_at = Annotated[
+    datetime,
+    mapped_column(
+        server_default=text("TIMEZONE('utc', now())"), onupdate=datetime.utcnow
+    ),
+]
 
 
 class StatusResponse(enum.Enum):
@@ -18,9 +30,9 @@ class StatusResponse(enum.Enum):
 
 
 class StatusVacancy(enum.Enum):
-    OPEN = "open"
-    CLOSED = "closed"
-    CANCELLED = "cancelled"
+    OPEN = "Открыта"
+    CLOSED = "Закрыта"
+    ARCHIVED = "В архиве"
 
 
 class Vacancy(Base):
@@ -29,18 +41,15 @@ class Vacancy(Base):
 
     title: Mapped[str]
     status_vacancy: Mapped[StatusVacancy] = mapped_column(
-        default=StatusVacancy.OPEN)
+        server_default=StatusVacancy.OPEN)
     company_name: Mapped[str]
     contact_user: Mapped[str | None]
     user_id: Mapped[int] = mapped_column(
         ForeignKey("users.id"), nullable=False)
     status_response: Mapped[StatusResponse] = mapped_column(
         default=StatusResponse.NO_RESPONSE)
-    created_at: Mapped[datetime] = mapped_column(default=datetime.utcnow)
-    updated_at: Mapped[datetime] = mapped_column(
-        default=datetime.utcnow,
-        onupdate=datetime.utcnow
-    )
+    created_at: Mapped[created_at]
+    updated_at: Mapped[updated_at]
 
     def __repr__(self):
         return f"<Vacancy {self.title}>"
