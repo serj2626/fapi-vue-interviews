@@ -5,7 +5,7 @@ from sqlalchemy.sql.sqltypes import Integer
 from sqlalchemy.sql.sqltypes import String
 import enum
 from sqlalchemy import ForeignKey
-from app.config.base import Base
+from app.config import Base
 from datetime import datetime
 
 

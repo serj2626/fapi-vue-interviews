@@ -348,6 +348,7 @@ tags
 # Persistent undo
 [._]*.un~
 
+certs/
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json

@@ -2,12 +2,17 @@ from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
-
+import sys
+from os.path import abspath, dirname
 from alembic import context
 
 from app.config import settings
 from app.config import Base
 from app.users import User
+
+
+sys.path.insert(0, dirname(dirname(dirname(abspath(__file__)))))
+
 
 config = context.config
 config.set_main_option("sqlalchemy.url", settings.DB_URL)
@@ -69,3 +74,4 @@ if context.is_offline_mode():
     run_migrations_offline()
 else:
     run_migrations_online()
+
