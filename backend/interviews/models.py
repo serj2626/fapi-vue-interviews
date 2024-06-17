@@ -1,12 +1,12 @@
 from sqlalchemy.orm import mapped_column
 from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import relationship
-from sqlalchemy.sql.sqltypes import Integer
-from sqlalchemy.sql.sqltypes import String
 import enum
 from sqlalchemy import ForeignKey
-from app.config import Base
+
 from datetime import datetime
+
+from backend.database import Base
 
 
 class StatusResponse(enum.Enum):
@@ -37,6 +37,10 @@ class Vacancy(Base):
     status_response: Mapped[StatusResponse] = mapped_column(
         default=StatusResponse.NO_RESPONSE)
     created_at: Mapped[datetime] = mapped_column(default=datetime.utcnow)
+    updated_at: Mapped[datetime] = mapped_column(
+        default=datetime.utcnow,
+        onupdate=datetime.utcnow
+    )
 
     def __repr__(self):
         return f"<Vacancy {self.title}>"
