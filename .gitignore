@@ -349,6 +349,8 @@ tags
 [._]*.un~
 .idea
 certs/
+certs
+.idea
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json
