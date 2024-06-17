@@ -7,7 +7,7 @@ from sqlalchemy import ForeignKey, text
 
 from datetime import datetime
 
-from base import Base
+from service.base import Base
 
 
 created_at = Annotated[

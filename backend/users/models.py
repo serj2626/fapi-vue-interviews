@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.sql.sqltypes import Integer
 from sqlalchemy.sql.sqltypes import String
 
-from base import Base
+from service.base import Base
 
 
 
