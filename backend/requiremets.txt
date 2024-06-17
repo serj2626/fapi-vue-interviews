@@ -1,0 +1,11 @@
+fastapi[all]
+celery[redis]
+alembic
+aiosqlite
+pytest
+wikipedia
+black
+flake8
+sqlalchemy
+pyjwt
+passlib
