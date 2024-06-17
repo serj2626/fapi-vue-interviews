@@ -1,9 +1,9 @@
 from datetime import datetime, timedelta
-from passlib.context import CryptContext
+
 import jwt
+from passlib.context import CryptContext
+
 from config import settings
-
-
 
 private_key = settings.auth_jwt.private_key_path.read_text()
 public_key = settings.auth_jwt.public_key_path.read_text()
@@ -40,13 +40,9 @@ def encode_jwt(
 
 
 def decode_jwt(
-    token: str | bytes, 
-    public_key: str = public_key, 
-    algorithm: str = algorithm
+    token: str | bytes, public_key: str = public_key, algorithm: str = algorithm
 ) -> dict:
-    
+
     decoded = jwt.decode(token, public_key, algorithms=[algorithm])
 
     return decoded
-
-

@@ -1,7 +1,9 @@
+from sqlalchemy import and_, insert, select
+
 from database import async_session
-from .models import User
-from sqlalchemy import and_, insert, select, and_
 from service import BaseCRUD
+
+from .models import User
 
 
 class UserCRUD(BaseCRUD):

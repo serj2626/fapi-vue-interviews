@@ -1,13 +1,12 @@
 from logging.config import fileConfig
 
-from sqlalchemy import engine_from_config
-from sqlalchemy import pool
-
 from alembic import context
+from sqlalchemy import engine_from_config, pool
+
 from config import settings
+from interviews import Vacancy
 from service.base import Base
 from users import User
-from interviews import Vacancy
 
 config = context.config
 config.set_main_option("sqlalchemy.url", f"{settings.DB_URL}?async_fallback=True")
@@ -57,9 +56,7 @@ def run_migrations_online() -> None:
     )
 
     with connectable.connect() as connection:
-        context.configure(
-            connection=connection, target_metadata=target_metadata
-        )
+        context.configure(connection=connection, target_metadata=target_metadata)
 
         with context.begin_transaction():
             context.run_migrations()

@@ -1,8 +1,8 @@
 """upgrade table users
 
-Revision ID: e61e55e6a28c
-Revises: 033e22feff3a
-Create Date: 2024-06-18 00:52:24.268262
+Revision ID: 3480aea3db93
+Revises: e61e55e6a28c
+Create Date: 2024-06-18 01:15:26.300723
 
 """
 
@@ -12,8 +12,8 @@ import sqlalchemy as sa
 from alembic import op
 
 # revision identifiers, used by Alembic.
-revision: str = "e61e55e6a28c"
-down_revision: Union[str, None] = "033e22feff3a"
+revision: str = "3480aea3db93"
+down_revision: Union[str, None] = "e61e55e6a28c"
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 
