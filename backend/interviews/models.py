@@ -41,7 +41,8 @@ class Vacancy(Base):
 
     title: Mapped[str]
     status_vacancy: Mapped[StatusVacancy] = mapped_column(
-        server_default=StatusVacancy.OPEN)
+        default=StatusVacancy.OPEN
+    )
     company_name: Mapped[str]
     contact_user: Mapped[str | None]
     user_id: Mapped[int] = mapped_column(

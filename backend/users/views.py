@@ -1,8 +1,16 @@
 from fastapi import APIRouter
 
-router = APIRouter(prefix="auth", tags=["Пользователи && Авторизация"])
+router = APIRouter(tags=["Пользователи && Авторизация"])
 
 
-@router.get("/users")
+@router.get("/")
 async def get_users():
     return {"message": "Hello World"}
+
+@router.post("/signup")
+async def signup():
+    return {"message": "Signup successful"}
+
+@router.post("/login")
+async def login():
+    return {"message": "Login successful"}
