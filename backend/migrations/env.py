@@ -7,6 +7,7 @@ from alembic import context
 from config import settings
 from service.base import Base
 from users import User
+from interviews import Vacancy
 
 config = context.config
 config.set_main_option("sqlalchemy.url", f"{settings.DB_URL}?async_fallback=True")
