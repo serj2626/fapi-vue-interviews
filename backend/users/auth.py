@@ -1,8 +1,13 @@
 from datetime import datetime, timedelta
 from passlib.context import CryptContext
-from pydantic import EmailStr
 import jwt
+from config import settings
 
+
+
+private_key = settings.auth_jwt.private_key_path.read_text()
+public_key = settings.auth_jwt.public_key_path.read_text()
+algorithm = settings.auth_jwt.algorithm
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
@@ -14,19 +19,34 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
     return pwd_context.verify(plain_password, hashed_password)
 
 
-def cteate_access_token(data: dict):
-    to_encode = data.copy()
-    expire = datetime.utcnow() + timedelta(minutes=26)
-    to_encode.update({"exp": expire})
-    # encoded_jwt = jwt.encode(to_encode, settings.SECRET_KEY, settings.ALGORITHM)
+def encode_jwt(
+    payload: dict,
+    private_key: str = private_key,
+    algorithm: str = algorithm,
+    expire_minutes: int = settings.auth_jwt.access_token_expire_minutes,
+    expire_timedelta: timedelta | None = None,
+) -> str:
 
-    # return encoded_jwt
+    to_encode = payload.copy()
+    now = datetime.utcnow()
+    if expire_timedelta:
+        exp = (now + expire_timedelta).timestamp()
+    else:
+        exp = (now + timedelta(minutes=expire_minutes)).timestamp()
+    to_encode.update(exp=exp, iat=now)
+    encoded = jwt.encode(to_encode, private_key, algorithm=algorithm)
+
+    return encoded
 
 
-async def authenticate_user(email: EmailStr, password: str):
-    # user = await UserService.find_one_or_none(email=email)
-    # if not user and not verify_password(password, user.hashed_password):
-    #     return None
+def decode_jwt(
+    token: str | bytes, 
+    public_key: str = public_key, 
+    algorithm: str = algorithm
+) -> dict:
+    
+    decoded = jwt.decode(token, public_key, algorithms=[algorithm])
 
-    # return user
-    ...
+    return decoded
+
+
