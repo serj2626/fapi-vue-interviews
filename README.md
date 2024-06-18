@@ -3,9 +3,8 @@
 
 ![alt text](./frontend/src/assets/readme.png)
 
-
-<details>
-  <summary>Задачи</summary>
+---
+### Задачи
 
 <details>
   <summary>FastAPI</summary>
@@ -19,6 +18,7 @@
   - [х] Функция создания jwt токена
   - [х] Установка и подключение celery и redis
   - [ ] Асинхронная функция для верификации пользователя
+
 </details>
 
 <details>
@@ -31,6 +31,37 @@
   - [x] Главная страница
   - [x] Компонент Header
   - [x] Глобальный компонент Spinner
-</details>
 
 </details>
+
+---
+
+### Стек
+
+<details>
+
+  <summary>FastAPI</summary>
+
+  - [x] FastAPI
+  - [х] PostgreSQL
+  - [х] Alembic
+  - [х] SQLAlchemy
+  - [х] Redis
+  - [х] Celery
+
+
+</details>
+
+<details>
+  <summary>Vue</summary>
+
+  - [x] Vue3 (Composition API)
+  - [x] Axios
+  - [x] Vue-router
+  - [x] Pinia
+  - [x] Vue-toast-notification
+  - [x] Bootstrap
+
+</details>
+
+---
