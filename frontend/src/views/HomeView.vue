@@ -3,33 +3,41 @@
 </script>
 
 <template>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Загрузка...</span>
+  </div>
+
+  <h1 class="text-center title">Список собеседований</h1>
+  <table class="table my-5">
+    <thead>
+      <tr>
+        <th scope="col">Актуальность</th>
+        <th scope="col">Вакансия</th>
+        <th scope="col">Компания</th>
+        <th scope="col">Контакт</th>
+        <th scope="col">Статус</th>
+        <th scope="col">Дата создания</th>
+        <th scope="col">Дата обновления</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Открыта</td>
+        <td>Python Developer</td>
+        <td>AMD</td>
+        <td>@nastya@mail.ru</td>
+        <td>Тестовое задание</td>
+        <td>2024-06-15</td>
+        <td>2024-06-26</td>
+      </tr>
+    </tbody>
+  </table>
 </template>
+
+
+<style scoped>
+
+.title{
+  color: blue;
+}
+</style>

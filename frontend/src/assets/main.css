@@ -1,7 +1,12 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     background-color: #f0eed2;
     font-family: 'Inter', sans-serif;
+}
+
+:root {
+    --color-1: #e9e395;
+    --color-2: #c436d1;
 }
