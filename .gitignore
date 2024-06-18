@@ -387,4 +387,9 @@ test/
 npm-debug.log
 yarn-error.log
 
+
+
+# My ignore
+dump.*
+
 # End of https://www.toptal.com/developers/gitignore/api/python,visualstudiocode,vim,linux,vue,vuejs,node

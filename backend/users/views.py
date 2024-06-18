@@ -29,7 +29,7 @@ async def register_user(user_data: Annotated[SUserCreate, Depends()]):
         username=user_data.username, email=user_data.email, password=hash_psw
     )
     return {
-        "msg": "Вы успешно зарегистрировались, для подтверждения аккаунта, подтвердите свою почту"
+        "msg": "Вы успешно зарегистрировались, для подтверждения аккаунта, перейдите на свою почту"
     }
 
 

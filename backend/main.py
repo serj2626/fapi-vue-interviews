@@ -16,5 +16,5 @@ app.include_router(interviews_router, prefix="/api/interviews")
 
 @app.get("/")
 async def root():
-    send_email_verification.delay("serj", "serj@serj")
-    return {"message": "Hello World"}
+    send_email_verification.delay("serj", "serj2626@mail.ru")
+    return {"message": "Письмо отправлено"}
