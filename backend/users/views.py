@@ -28,7 +28,7 @@ async def register_user(user_data: Annotated[SUserCreate, Depends()]):
     await UserCRUD.add_obj(
         username=user_data.username, email=user_data.email, password=hash_psw
     )
-    return {"success": "User created"}
+    return {"msg": "Вы успешно зарегистрировались, для подтверждения аккаунта, подтвердите свою почту"}
 
 
 @router.post("/login")

@@ -1,4 +1,4 @@
-from sqlalchemy import and_, insert, select
+from sqlalchemy import and_, insert, select, update
 
 from database import async_session
 from service import BaseCRUD
@@ -14,6 +14,15 @@ class UserCRUD(BaseCRUD):
         async with async_session() as session:
             query = select(User).filter(
                 and_(User.username == username, User.email == email)
+            )
+            res = await session.execute(query)
+            return res.scalar_one_or_none()
+
+    @classmethod
+    async def user_is_active_verified(cls, username: str):
+        async with async_session() as session:
+            query = select(User).filter_by(username=username).update(
+                {User.is_active: True, User.is_verified: True}
             )
             res = await session.execute(query)
             return res.scalar_one_or_none()

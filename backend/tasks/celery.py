@@ -1,4 +1,7 @@
-from app.config import settings
+from config import settings
 from celery import Celery
 
-# celery = Celery(__name__, broker=settings.CELERY_BROKER_URL)
+celery = Celery(
+    'tasks', 
+    broker=f'redis://{settings.REDIS_HOST}:{settings.REDIS_PORT}',
+    include=['users.tasks'])
