@@ -6,7 +6,7 @@ import Header from './components/Header.vue'
 <template>
   <Header />
 
-  <div class="container my-5">
+  <div class="container-fluid my-5">
     <div class="row">
       <RouterView />
     </div>
