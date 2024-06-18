@@ -8,10 +8,10 @@ from pprint import pprint
 BASE_DIR = Path(__file__).resolve().parent
 
 
-class TitleConfig(BaseModel):
-    title: str = 'API'
-    description: str = 'API description'
-    version: str = '1.0.0'
+class APPConfig(BaseModel):
+    title: str = "API"
+    description: str = "API description"
+    version: str = "1.0.0"
 
 
 class AuthJWT(BaseModel):
@@ -38,7 +38,7 @@ class Settings(BaseSettings):
     REDIS_PORT: int
 
     auth_jwt: AuthJWT = AuthJWT()
-    app: TitleConfig = TitleConfig()
+    app: APPConfig = APPConfig()
 
     @property
     def DB_URL(self) -> str:

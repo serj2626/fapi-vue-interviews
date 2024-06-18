@@ -21,8 +21,10 @@ class UserCRUD(BaseCRUD):
     @classmethod
     async def user_is_active_verified(cls, username: str):
         async with async_session() as session:
-            query = select(User).filter_by(username=username).update(
-                {User.is_active: True, User.is_verified: True}
+            query = (
+                select(User)
+                .filter_by(username=username)
+                .update({User.is_active: True, User.is_verified: True})
             )
             res = await session.execute(query)
             return res.scalar_one_or_none()
