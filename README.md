@@ -42,12 +42,12 @@
 
   <summary>FastAPI</summary>
 
-  - [x] FastAPI
-  - [х] PostgreSQL
-  - [х] Alembic
-  - [х] SQLAlchemy
-  - [х] Redis
-  - [х] Celery
+  - FastAPI
+  - PostgreSQL
+  - Alembic
+  - SQLAlchemy
+  - Redis
+  - Celery
 
 
 </details>
@@ -55,12 +55,12 @@
 <details>
   <summary>Vue</summary>
 
-  - [x] Vue3 (Composition API)
-  - [x] Axios
-  - [x] Vue-router
-  - [x] Pinia
-  - [x] Vue-toast-notification
-  - [x] Bootstrap
+  - Vue3 (Composition API)
+  - Axios
+  - Vue-router
+  - Pinia
+  - Vue-toast-notification
+  - Bootstrap
 
 </details>
 
