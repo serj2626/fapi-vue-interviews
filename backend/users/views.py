@@ -58,3 +58,9 @@ async def get_current_user(
         "email": user.email,
         "login_date": datetime.fromtimestamp(iat),
     }
+
+
+@router.get("/confirm-email/{email_to}")
+async def confirm_email(email_to: Annotated[str, Depends(get_current_user)]):
+    await UserCRUD.user_is_active_verified(email_to)
+    return {"msg": "Ваша почта подтверждена"}

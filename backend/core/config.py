@@ -1,16 +1,16 @@
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic_settings import BaseSettings
+from pydantic_settings import SettingsConfigDict
 from pydantic import BaseModel
 
 from pathlib import Path
-from pprint import pprint
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 class APPConfig(BaseModel):
-    title: str = "API"
-    description: str = "API description"
+    title: str = "API для собеседований"
+    description: str = "API for interviews"
     version: str = "1.0.0"
 
 
@@ -28,6 +28,9 @@ class Settings(BaseSettings):
     DB_HOST: str
     DB_NAME: str
     DB_ECHO: bool = True
+
+    APP_HOST: str
+    APP_PORT: int
 
     SMTP_HOST: str
     SMTP_PORT: int
@@ -48,4 +51,3 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
-

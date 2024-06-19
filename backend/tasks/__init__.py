@@ -1,0 +1,1 @@
+from .tasks import send_email_for_verification_task
