@@ -8,7 +8,7 @@ from core import async_session
 from .auth import encode_jwt, get_password_hash
 from .crud import UserCRUD
 from .dependencies import (
-    get_current_token_payload, get_current_user, validate_user
+    get_current_token_payload, get_current_user, validate_user, verification_user
 )
 from .models import User
 from .schemas import STokenInfo, SUserAuth, SUserCreate
@@ -63,15 +63,5 @@ async def get_current_user(
 
 
 @router.get("/confirm-email/{email_to}")
-async def confirm_email(email_to: str):
-    user = await UserCRUD.find_one_or_none(email=email_to)
-    if not user:
-        raise HTTPException(status_code=400, detail="Invalid data")
-
-    query = update(User).where(User.email == email_to).values(
-        is_active=True, is_verified=True)
-    async with async_session() as session:
-        await session.execute(query)
-        await session.commit()
-
-    return {"msg": "Ваша почта подтверждена"}
+async def confirm_email(email_to: str, result: dict = Depends(verification_user)):
+    return result

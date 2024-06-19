@@ -1,4 +1,20 @@
 <script setup>
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
+
+const msg = ref('');
+
+const getMessage = async () => {
+  try {
+    let res = await axios.get('/');
+    console.log(res.data);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+onMounted(getMessage);
+
 
 </script>
 

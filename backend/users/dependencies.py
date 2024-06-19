@@ -1,9 +1,10 @@
 
-from fastapi import Depends, Form, HTTPException
+from fastapi import Depends, Form, HTTPException, Request
 from fastapi.security import OAuth2PasswordBearer
 from jwt.exceptions import InvalidTokenError
+from sqlalchemy import update
 
-
+from core import async_session
 from .auth import decode_jwt, verify_password
 from .crud import UserCRUD
 from .models import User
@@ -51,5 +52,25 @@ async def get_current_user(payload: dict = Depends(get_current_token_payload)) -
     return user
 
 
-async def verification_user():
-    pass
+async def get_user_for_email(request: Request) -> User:
+    params = request.query_params
+    email = params.get('email')
+
+    if not email:
+        raise HTTPException(status_code=400, detail="Invalid email")
+
+    user = await UserCRUD.find_one_or_none(email=email)
+
+    if not user:
+        raise HTTPException(status_code=400, detail="User not found")
+
+    return user
+
+
+async def verification_user(user: User = Depends(get_user_for_email)) -> dict:
+    query = update(User).where(User.email == user.email).values(
+        is_active=True, is_verified=True)
+    async with async_session() as session:
+        await session.execute(query)
+        await session.commit()
+    return {"msg": "User verified", "email": user.email}
