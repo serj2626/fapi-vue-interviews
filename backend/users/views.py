@@ -1,20 +1,18 @@
+from datetime import datetime
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Response
 
-from .auth import get_password_hash
+from .auth import encode_jwt, get_password_hash
 from .crud import UserCRUD
-from .schemas import SUserCreate
+from .dependencies import get_current_token_payload, get_current_user, validate_user
+from .models import User
+from .schemas import STokenInfo, SUserAuth, SUserCreate
 
 router = APIRouter(tags=["Пользователи && Авторизация"])
 
 
-@router.get("/")
-async def get_users():
-    return {"message": "Hello World"}
-
-
-@router.post("/register", status_code=201)
+@router.post("/register", summary="Create new user", status_code=201)
 async def register_user(user_data: Annotated[SUserCreate, Depends()]):
     existing_user_by_email = await UserCRUD.find_one_or_none(email=user_data.email)
 
@@ -33,6 +31,27 @@ async def register_user(user_data: Annotated[SUserCreate, Depends()]):
     }
 
 
-@router.post("/login")
-async def login():
-    return {"message": "Login successful"}
+@router.post(
+    "/login",
+    summary="Create access and refresh tokens for user",
+    response_model=STokenInfo,
+)
+async def login_user(response: Response, user: SUserAuth = Depends(validate_user)):
+    jwt_payload = {"sub": user.id, "username": user.username, "email": user.email}
+    token = encode_jwt(payload=jwt_payload)
+    # response.headers["Authorization"] = f"Bearer {token}"
+    # response.set_cookie(key="access_token", value=token, httponly=True)
+    return STokenInfo(access_token=token, token_type="Bearer")
+
+
+@router.get("/user/me", summary="Get current user")
+async def get_current_user(
+    payload: dict = Depends(get_current_token_payload),
+    user: User = Depends(get_current_user),
+):
+    iat = payload.get("iat")
+    return {
+        "username": user.username,
+        "email": user.email,
+        "login_date": datetime.fromtimestamp(iat),
+    }

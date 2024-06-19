@@ -30,12 +30,18 @@ def encode_jwt(
     to_encode = payload.copy()
     now = datetime.utcnow()
     if expire_timedelta:
-        exp = (now + expire_timedelta).timestamp()
+        expire = now + expire_timedelta
     else:
-        exp = (now + timedelta(minutes=expire_minutes)).timestamp()
-    to_encode.update(exp=exp, iat=now)
-    encoded = jwt.encode(to_encode, private_key, algorithm=algorithm)
-
+        expire = now + timedelta(minutes=expire_minutes)
+    to_encode.update(
+        exp=expire,
+        iat=now,
+    )
+    encoded = jwt.encode(
+        to_encode,
+        private_key,
+        algorithm=algorithm,
+    )
     return encoded
 
 

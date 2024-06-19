@@ -1,7 +1,9 @@
 from logging import config
-from tasks.celery import celery
-from fastapi_mail import FastMail, MessageSchema, ConnectionConfig, MessageType
+
+from fastapi_mail import ConnectionConfig, FastMail, MessageSchema, MessageType
+
 from config import settings
+from tasks.celery import celery
 
 conf = ConnectionConfig(
     MAIL_USERNAME="Serj",
@@ -10,7 +12,7 @@ conf = ConnectionConfig(
     MAIL_PORT=settings.SMTP_PORT,
     MAIL_SERVER=settings.SMTP_HOST,
     MAIL_STARTTLS=True,
-    MAIL_SSL_TLS=False
+    MAIL_SSL_TLS=False,
 )
 
 #     "MAIL_USERNAME": "Serj",
@@ -25,7 +27,7 @@ conf = ConnectionConfig(
 
 @celery.task
 def send_email_verification(username: str, email: str):
-    template = f'''
+    template = f"""
         <!DOCTYPE html>
         <html lang="en">
         <head>
@@ -56,7 +58,7 @@ def send_email_verification(username: str, email: str):
 
         </body>
         </html>
-    '''
+    """
     message = MessageSchema(
         subject="Подтверждение почты",
         recipients=[email],
@@ -66,4 +68,4 @@ def send_email_verification(username: str, email: str):
 
     fm = FastMail(conf)
     fm.send_message(message)
-    return f'Send verification email to {username} with {email}'
+    return f"Send verification email to {username} with {email}"
