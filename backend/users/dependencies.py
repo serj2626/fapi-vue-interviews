@@ -49,3 +49,7 @@ async def get_current_user(payload: dict = Depends(get_current_token_payload)) -
         raise HTTPException(status_code=400, detail="Invalid data")
 
     return user
+
+
+async def verification_user():
+    pass

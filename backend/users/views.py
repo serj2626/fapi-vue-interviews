@@ -1,8 +1,10 @@
 from datetime import datetime
 from typing import Annotated
+from sqlalchemy import update
 
 from fastapi import APIRouter, Depends, HTTPException, Response
-
+from pydantic import EmailStr
+from core import async_session
 from .auth import encode_jwt, get_password_hash
 from .crud import UserCRUD
 from .dependencies import (
@@ -61,6 +63,15 @@ async def get_current_user(
 
 
 @router.get("/confirm-email/{email_to}")
-async def confirm_email(email_to: Annotated[str, Depends(get_current_user)]):
-    await UserCRUD.user_is_active_verified(email_to)
+async def confirm_email(email_to: str):
+    user = await UserCRUD.find_one_or_none(email=email_to)
+    if not user:
+        raise HTTPException(status_code=400, detail="Invalid data")
+
+    query = update(User).where(User.email == email_to).values(
+        is_active=True, is_verified=True)
+    async with async_session() as session:
+        await session.execute(query)
+        await session.commit()
+
     return {"msg": "Ваша почта подтверждена"}
