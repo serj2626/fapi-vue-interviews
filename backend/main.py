@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from core import settings
 from interviews import router as interviews_router
 from users import router as users_router
-from users.tasks import send_email_verification
+
 
 app = FastAPI(
     title=settings.app.title,
@@ -24,5 +24,4 @@ app.add_middleware(
 
 @app.get("/")
 async def root():
-    send_email_verification.delay("serj", "serj2626@mail.ru")
     return {"message": "Письмо отправлено"}

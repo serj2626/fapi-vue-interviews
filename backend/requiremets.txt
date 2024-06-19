@@ -1,19 +1,24 @@
+aiosmtplib==2.0.2
 aiosqlite==0.20.0
 alembic==1.13.1
 amqp==5.2.0
 annotated-types==0.7.0
 anyio==4.4.0
 asyncpg==0.29.0
+autoflake==2.3.1
 beautifulsoup4==4.12.3
 billiard==4.2.0
 black==24.4.2
+blinker==1.8.2
 celery==5.4.0
 certifi==2024.6.2
+cffi==1.16.0
 charset-normalizer==3.3.2
 click==8.1.7
 click-didyoumean==0.3.1
 click-plugins==1.1.1
 click-repl==0.3.0
+cryptography==42.0.8
 dnspython==2.6.1
 email_validator==2.1.2
 fastapi==0.111.0
@@ -26,6 +31,7 @@ httptools==0.6.1
 httpx==0.27.0
 idna==3.7
 iniconfig==2.0.0
+isort==5.13.2
 itsdangerous==2.2.0
 Jinja2==3.1.4
 kombu==5.3.7
@@ -35,6 +41,7 @@ MarkupSafe==2.1.5
 mccabe==0.7.0
 mdurl==0.1.2
 mypy-extensions==1.0.0
+nodeenv==1.9.1
 orjson==3.10.5
 packaging==24.1
 passlib==1.7.4
@@ -43,6 +50,7 @@ platformdirs==4.2.2
 pluggy==1.5.0
 prompt_toolkit==3.0.47
 pycodestyle==2.12.0
+pycparser==2.22
 pydantic==2.7.4
 pydantic-extra-types==2.8.2
 pydantic-settings==2.3.3
@@ -50,6 +58,7 @@ pydantic_core==2.18.4
 pyflakes==3.2.0
 Pygments==2.18.0
 PyJWT==2.8.0
+pyright==1.1.367
 pytest==8.2.2
 python-dateutil==2.9.0.post0
 python-dotenv==1.0.1
