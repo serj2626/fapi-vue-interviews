@@ -1,6 +1,6 @@
 from sqlalchemy import and_, insert, select, update
 
-from backend.core.database import async_session
+from core import async_session
 from service import BaseCRUD
 
 from .models import User

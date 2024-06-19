@@ -5,7 +5,7 @@ from pathlib import Path
 from pprint import pprint
 
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 class APPConfig(BaseModel):

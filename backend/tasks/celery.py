@@ -1,6 +1,6 @@
 from celery import Celery
 
-from backend.core.config import settings
+from core import settings
 
 celery = Celery(
     "tasks",

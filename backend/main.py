@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from backend.core.config import settings
+from core import settings
 from interviews import router as interviews_router
 from users import router as users_router
 from users.tasks import send_email_verification

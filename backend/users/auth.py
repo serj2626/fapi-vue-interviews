@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 import jwt
 from passlib.context import CryptContext
 
-from backend.core.config import settings
+from core import settings
 
 private_key = settings.auth_jwt.private_key_path.read_text()
 public_key = settings.auth_jwt.public_key_path.read_text()
