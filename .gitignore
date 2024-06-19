@@ -391,5 +391,7 @@ yarn-error.log
 
 # My ignore
 dump.*
-
+.flake
+.flake*
+*.toml
 # End of https://www.toptal.com/developers/gitignore/api/python,visualstudiocode,vim,linux,vue,vuejs,node

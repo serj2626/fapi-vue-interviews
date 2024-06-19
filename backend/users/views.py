@@ -5,7 +5,9 @@ from fastapi import APIRouter, Depends, HTTPException, Response
 
 from .auth import encode_jwt, get_password_hash
 from .crud import UserCRUD
-from .dependencies import get_current_token_payload, get_current_user, validate_user
+from .dependencies import (
+    get_current_token_payload, get_current_user, validate_user
+)
 from .models import User
 from .schemas import STokenInfo, SUserAuth, SUserCreate
 
@@ -37,7 +39,8 @@ async def register_user(user_data: Annotated[SUserCreate, Depends()]):
     response_model=STokenInfo,
 )
 async def login_user(response: Response, user: SUserAuth = Depends(validate_user)):
-    jwt_payload = {"sub": user.id, "username": user.username, "email": user.email}
+    jwt_payload = {"sub": user.id,
+                   "username": user.username, "email": user.email}
     token = encode_jwt(payload=jwt_payload)
     # response.headers["Authorization"] = f"Bearer {token}"
     # response.set_cookie(key="access_token", value=token, httponly=True)

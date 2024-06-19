@@ -3,9 +3,10 @@ from logging.config import fileConfig
 from alembic import context
 from sqlalchemy import engine_from_config, pool
 
-from config import settings
+
 from interviews import Vacancy
-from service.base import Base
+from core import settings
+from core import Base
 from users import User
 
 config = context.config

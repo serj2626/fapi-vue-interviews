@@ -2,7 +2,7 @@ from logging import config
 
 from fastapi_mail import ConnectionConfig, FastMail, MessageSchema, MessageType
 
-from config import settings
+from backend.core.config import settings
 from tasks.celery import celery
 
 conf = ConnectionConfig(
