@@ -8,7 +8,8 @@ import { RouterLink } from "vue-router";
   </div>
 
   <div class="container">
-    <ul class="nav nav-pills mt-5 d-flex justify-content-center">
+    <hr class="border border-5 border-white">
+    <ul class="nav nav-pills my-5 d-flex justify-content-center">
       <li class="nav-item">
         <RouterLink :to="{ name: 'home' }" class="nav-link ">Главная</RouterLink>
       </li>
