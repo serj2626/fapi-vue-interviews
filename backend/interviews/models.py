@@ -37,12 +37,10 @@ class Vacancy(Base):
     __tablename__ = "vacancies"
 
     title: Mapped[str]
-    status_vacancy: Mapped[StatusVacancy] = mapped_column(
-        default=StatusVacancy.OPEN)
+    status_vacancy: Mapped[StatusVacancy] = mapped_column(default=StatusVacancy.OPEN)
     company_name: Mapped[str]
     contact_user: Mapped[str | None]
-    user_id: Mapped[int] = mapped_column(
-        ForeignKey("users.id"), nullable=False)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
     status_response: Mapped[StatusResponse] = mapped_column(
         default=StatusResponse.NO_RESPONSE
     )

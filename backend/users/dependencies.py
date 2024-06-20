@@ -1,21 +1,18 @@
-
-from re import T
 from typing import Annotated
+
 from fastapi import Depends, Form, HTTPException, Request
 from fastapi.security import OAuth2PasswordBearer
 from jwt.exceptions import InvalidTokenError
 from sqlalchemy import update
 
-from .schemas import SUserCreate
 from core import async_session
+
 from .auth import decode_jwt, get_password_hash, verify_password
 from .crud import UserCRUD
 from .models import User
+from .schemas import SUserCreate
 
-oauth2_scheme = OAuth2PasswordBearer(
-    tokenUrl="/api/users/login",
-    scheme_name="JWT"
-)
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/users/login", scheme_name="JWT")
 
 
 async def validate_user(username: str = Form(), password: str = Form()) -> User:
@@ -57,7 +54,7 @@ async def get_current_user(payload: dict = Depends(get_current_token_payload)) -
 
 async def get_user_for_email(request: Request) -> User:
     params = request.query_params
-    email = params.get('email')
+    email = params.get("email")
 
     if not email:
         raise HTTPException(status_code=400, detail="Invalid email")
@@ -71,8 +68,11 @@ async def get_user_for_email(request: Request) -> User:
 
 
 async def verification_user(user: User = Depends(get_user_for_email)) -> dict:
-    query = update(User).where(User.email == user.email).values(
-        is_active=True, is_verified=True)
+    query = (
+        update(User)
+        .where(User.email == user.email)
+        .values(is_active=True, is_verified=True)
+    )
     async with async_session() as session:
         await session.execute(query)
         await session.commit()

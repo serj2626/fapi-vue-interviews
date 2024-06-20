@@ -1,35 +1,24 @@
 from datetime import datetime
-from typing import Annotated
-from sqlalchemy import update
 
-from fastapi import APIRouter, Depends, HTTPException, Response
-from pydantic import EmailStr
-from core import async_session
-from .auth import encode_jwt, get_password_hash
-from .crud import UserCRUD
+from fastapi import APIRouter, Depends, Request, Response
+
+
+from .auth import encode_jwt
 from .dependencies import (
-    get_current_token_payload, get_current_user, validate_user, verification_user
+    create_user,
+    get_current_token_payload,
+    get_current_user,
+    validate_user,
+    verification_user,
 )
 from .models import User
-from .schemas import STokenInfo, SUserAuth, SUserCreate
+from .schemas import STokenInfo, SUserAuth
 
 router = APIRouter(tags=["Пользователи && Авторизация"])
 
 
 @router.post("/register", summary="Create new user", status_code=201)
-async def register_user(user_data: Annotated[SUserCreate, Depends()]):
-    existing_user_by_email = await UserCRUD.find_one_or_none(email=user_data.email)
-
-    existing_user_by_username = await UserCRUD.find_one_or_none(
-        username=user_data.username
-    )
-    if existing_user_by_email or existing_user_by_username:
-        raise HTTPException(status_code=400, detail="User already exists")
-
-    hash_psw = get_password_hash(user_data.password)
-    await UserCRUD.add_obj(
-        username=user_data.username, email=user_data.email, password=hash_psw
-    )
+async def register_user(request: Request, result: bool = Depends(create_user)):
     return {
         "msg": "Вы успешно зарегистрировались, для подтверждения аккаунта, перейдите на свою почту"
     }
@@ -41,8 +30,7 @@ async def register_user(user_data: Annotated[SUserCreate, Depends()]):
     response_model=STokenInfo,
 )
 async def login_user(response: Response, user: SUserAuth = Depends(validate_user)):
-    jwt_payload = {"sub": user.id,
-                   "username": user.username, "email": user.email}
+    jwt_payload = {"sub": user.id, "username": user.username, "email": user.email}
     token = encode_jwt(payload=jwt_payload)
     # response.headers["Authorization"] = f"Bearer {token}"
     # response.set_cookie(key="access_token", value=token, httponly=True)

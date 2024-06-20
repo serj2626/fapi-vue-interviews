@@ -22,6 +22,7 @@ import { RouterLink } from "vue-router";
         <a class="nav-link disabled" aria-disabled="true">Выйти</a>
       </li>
     </ul>
+    <hr class="border border-5 border-white">
   </div>
 </template>
 

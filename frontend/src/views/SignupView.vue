@@ -3,11 +3,10 @@ import axios from "axios";
 import { reactive } from "vue";
 import { useToast } from "vue-toast-notification";
 
-const toast = useToast();
+const $toast = useToast();
 
 
 const form = reactive({
-  
   username: "",
   email: "",
   password: "",
@@ -15,17 +14,20 @@ const form = reactive({
 
 const submitForm = async () => {
   try {
-    const res = await axios.post("/api/users/register", { ...form });
-    toast.success("Аккаунт успешно создан");
-    let UserForm = new FormData();
-    console.log(UserForm);
+    // console.log({ ...form });
+    // let UserForm = new FormData();
+    // console.log(UserForm);
+    const res = await axios.post("/api/users/register",  { ...form },
+    );
+    $toast.success("Аккаунт успешно создан");
+
     form.email = "";
     form.username = "";
     form.password = "";
     console.log(res);
-    toast.success("Аккаунт успешно создан");
+    $toast.success("Аккаунт успешно создан");
   } catch {
-    toast.error("Ошибка при создании аккаунта");
+    $toast.error("Ошибка при создании аккаунта");
   }
 };
 </script>

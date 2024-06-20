@@ -1,19 +1,19 @@
 from email.message import EmailMessage
-from core import settings
+
 from pydantic import EmailStr
+
+from core import settings
 
 localhost_url = f"http://{settings.APP_HOST}:{settings.APP_PORT}"
 
 
-def create_email_for_verification(
-    email_to: EmailStr
-):
+def create_email_for_verification(email_to: EmailStr):
     email = EmailMessage()
     email["To"] = email_to
     email["From"] = settings.SMTP_USER
-    email["Subject"] = 'Подтверждение почты'
+    email["Subject"] = "Подтверждение почты"
     email.set_content(
-        f'''
+        f"""
             <h1>Подтверждение почты</h1>
             <p>Здравствуйте. {email_to}</p><br>
                 <p>Для подтверждения почты перейдите по ссылке: 
@@ -21,7 +21,7 @@ def create_email_for_verification(
                 </p>
             <hr>
             <p>С уважением, администрация сайта</p>
-        ''',
+        """,
         subtype="html",
     )
 

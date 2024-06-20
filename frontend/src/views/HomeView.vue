@@ -24,11 +24,11 @@ onMounted(getMessage);
     <table class="table my-5 shadow-lg">
       <thead>
         <tr>
-          <th scope="col">Актуальность</th>
+          <th scope="col">Статус</th>
           <th scope="col">Вакансия</th>
           <th scope="col">Компания</th>
           <th scope="col">Контакт</th>
-          <th scope="col">Статус</th>
+          <th scope="col">Отклики</th>
           <th scope="col">Дата создания</th>
           <th scope="col">Дата обновления</th>
           <th scope="col">Действие</th>
@@ -41,10 +41,14 @@ onMounted(getMessage);
           <td>AMD</td>
           <td>@nastya@mail.ru</td>
           <td>
-            <div class="btn-group dropend">
-              <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                Тестовое задание
+
+            <div class="btn-group">
+              <button class="btn btn-warning btn-sm" type="button">
+                Без отклика
+              </button>
+              <button type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="visually-hidden">Toggle Dropdown</span>
               </button>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item bg-white" href="#">Без отклика</a></li>
@@ -59,15 +63,20 @@ onMounted(getMessage);
           <td>2024-06-26</td>
           <td>
             <div class="btn-group dropend">
-              <button type="button" class="btn btn-sm btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
-                aria-expanded="false">
+              <div class="btn-group">
+              <button class="btn btn-info btn-sm" type="button">
                 Выбрать
+              </button>
+              <button type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="visually-hidden">Выбрать</span>
               </button>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item bg-white" href="#">Удалить</a></li>
                 <li><a class="dropdown-item bg-white" href="#">Редактировать</a></li>
                 <li><a class="dropdown-item bg-white" href="#">Действие</a></li>
               </ul>
+            </div>
             </div>
           </td>
         </tr>

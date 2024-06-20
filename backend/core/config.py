@@ -1,9 +1,7 @@
-from pydantic_settings import BaseSettings
-from pydantic_settings import SettingsConfigDict
-from pydantic import BaseModel
-
 from pathlib import Path
 
+from pydantic import BaseModel
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
