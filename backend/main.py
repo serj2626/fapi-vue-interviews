@@ -5,7 +5,6 @@ from core import settings
 from interviews import router as interviews_router
 from users import router as users_router
 
-
 app = FastAPI(
     title=settings.app.title,
     description=settings.app.description,
@@ -13,9 +12,6 @@ app = FastAPI(
 )
 app.include_router(users_router, prefix="/api/users")
 app.include_router(interviews_router, prefix="/api/interviews")
-
-
-
 
 app.add_middleware(
     CORSMiddleware,
@@ -33,7 +29,6 @@ app.add_middleware(
         "Set-Cookie",
         "Cookie",
         "X-CSRFToken",
-        'Access-Control-Allow-Credentials',
         'Access-Control-Allow-Headers',
         'Access-Control-Allow-Methods',
         'Access-Control-Allow-Origin',
@@ -44,12 +39,8 @@ app.add_middleware(
     ],
 )
 
+
 @app.get("/")
 async def root():
     send_email_for_verification_task.delay('serj2626@mail.ru')
     return {"message": "Письмо отправлено"}
-
-
-@app.get("/hello")
-async def root():
-    return {"message": "Hello"}

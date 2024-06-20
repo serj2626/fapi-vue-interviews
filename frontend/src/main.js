@@ -10,7 +10,7 @@ import axios from 'axios'
 import "bootstrap/dist/css/bootstrap.css"
 import "bootstrap-vue/dist/bootstrap-vue.css"
 
-
+axios.defaults.withCredentials = true;
 axios.defaults.baseURL = 'http://localhost:8000'
 
 
