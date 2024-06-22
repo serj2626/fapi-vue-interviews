@@ -5,7 +5,7 @@ from typing import Annotated
 from sqlalchemy import ForeignKey, text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from core import Base
+from app.core import Base
 
 created_at = Annotated[
     datetime, mapped_column(server_default=text("TIMEZONE('utc', now())"))
@@ -37,13 +37,11 @@ class Vacancy(Base):
     __tablename__ = "vacancies"
 
     title: Mapped[str]
-    status_vacancy: Mapped[StatusVacancy] = mapped_column(default=StatusVacancy.OPEN)
+    status_vacancy: Mapped[StatusVacancy]
     company_name: Mapped[str]
     contact_user: Mapped[str | None]
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
-    status_response: Mapped[StatusResponse] = mapped_column(
-        default=StatusResponse.NO_RESPONSE
-    )
+    status_response: Mapped[StatusResponse]
     created_at: Mapped[created_at]
     updated_at: Mapped[updated_at]
 

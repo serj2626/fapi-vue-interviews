@@ -1,6 +1,6 @@
 from sqlalchemy import insert, select
 
-from core import async_session
+from app.core import async_session
 
 
 class BaseCRUD:

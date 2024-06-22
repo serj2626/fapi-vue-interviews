@@ -2,7 +2,7 @@ from email.message import EmailMessage
 
 from pydantic import EmailStr
 
-from core import settings
+from app.core import settings
 
 localhost_url = f"http://{settings.APP_HOST}:{settings.APP_PORT}"
 

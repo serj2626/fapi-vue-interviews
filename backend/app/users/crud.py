@@ -1,7 +1,7 @@
 from sqlalchemy import and_, insert, select, update
 
-from core import async_session
-from service import BaseCRUD
+from app.core import async_session
+from app.service import BaseCRUD
 
 from .models import User
 

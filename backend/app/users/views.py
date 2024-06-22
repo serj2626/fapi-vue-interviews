@@ -17,8 +17,11 @@ from .schemas import STokenInfo, SUserAuth
 router = APIRouter(tags=["Пользователи && Авторизация"])
 
 
-@router.post("/register", summary="Create new user", status_code=201)
-async def register_user(request: Request, result: bool = Depends(create_user)):
+@router.post("/register", 
+summary="Create new user", 
+status_code=201,
+dependencies=[Depends(create_user)])
+async def register_user():
     return {
         "msg": "Вы успешно зарегистрировались, для подтверждения аккаунта, перейдите на свою почту"
     }

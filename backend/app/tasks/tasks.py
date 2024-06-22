@@ -2,7 +2,7 @@ import smtplib
 
 from pydantic import EmailStr
 
-from core import settings
+from app.core import settings
 
 from .celery import celery
 from .email_templates import create_email_for_verification

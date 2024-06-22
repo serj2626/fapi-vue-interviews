@@ -5,7 +5,7 @@ from fastapi.security import OAuth2PasswordBearer
 from jwt.exceptions import InvalidTokenError
 from sqlalchemy import update
 
-from core import async_session
+from app.core import async_session
 
 from .auth import decode_jwt, get_password_hash, verify_password
 from .crud import UserCRUD
