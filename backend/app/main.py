@@ -14,33 +14,6 @@ app = FastAPI(
 app.include_router(users_router, prefix="/api/users")
 app.include_router(interviews_router, prefix="/api/interviews")
 
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=["http://localhost:5173"],
-#     allow_credentials=True,
-#     allow_methods=[
-#         "GET",
-#         "POST",
-#         "PUT",
-#         "DELETE",
-#         "OPTIONS",
-#     ],
-#     allow_headers=[
-#         "Content-Type",
-#         "Set-Cookie",
-#         "Cookie",
-#         "X-CSRFToken",
-#         'Access-Control-Allow-Headers',
-#         'Access-Control-Allow-Methods',
-#         'Access-Control-Allow-Origin',
-#         'Access-Authorization',
-#         "Authorization",
-#         "Bearer",
-#         'Access-Control-Allow-Origin'
-
-#     ],
-# )
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:5173"],
